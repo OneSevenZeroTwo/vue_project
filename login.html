@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>拉勾网</title>
+<link rel="stylesheet" type="text/css" href="//img.lagou.com/passport/static/mobile/modules/common/main_e3976ca.css">
+<script src="js/jquery-3.2.1.js"></script>
+<script>
+	$(function(){
+		
+		//注册
+		$('.btn_green_border').on('click',function(){
+			$.ajax({
+				url:'http://localhost:2090/zhuce',
+				type:'POST',
+				data:{
+					username:$('.r_email').val(),
+					psw:$('.r_psw').val()
+				},
+				success:function(data){
+
+				}
+
+			})
+		})
+
+
+		//登录
+		$('.btn_green').on('click',function(){
+			$.ajax({
+				url:'http://localhost:2090/denglu',
+				type:'POST',
+				data:{
+					username:$('.r_email').val(),
+					psw:$('.r_psw').val()
+				},
+				success:function(data){
+					if(data==1){
+						$(location).attr('href', 'welcome.html');
+					}else if(data==0){
+						alert('账户或密码不正确')
+					}
+				}
+
+			})
+		})
+	})
+
+</script>
+</head>
+<body class="radial">
+<input type="hidden" value="" id="isVisiable_request_form_verifyCode">
+	<div class="new_wrapper">
+	    <form data-view="loginView">
+	    	<div class="new_register">
+	    		<div data-propertyname="username" data-controltype="Phone" style="display: block;">
+	    			<input type="text" placeholder="已验证手机/邮箱" class="border_btm r_email top">
+	    		</div>
+	    		<div data-propertyname="password" data-controltype="Password" style="display: block;">
+					<div>
+						<input type="password" placeholder="密码" class="r_psw btm" maxlength="16">
+						<i class="eye"></i>
+					</div>
+	    			
+	    		</div>
+	    		
+	    	</div>
+	    	<!-- 验证码 -->
+	        <div id="vcodeWrap" data-propertyname="request_form_verifyCode" data-controltype="VerifyCode" style="display:none;">
+	            <input type="text" id="vcode" name="vcode" tabindex="3" placeholder="请证明你不是机器人">
+	            <img src="" width="113" height="42" id="vcodeImg">
+	            <a>看不清楚，<em>换一张</em></a>   
+	            <!-- <span class="error" style="display:none;" id="vcodeError"></span> -->
+	        </div>
+	        <!-- 验证码 -->
+	    	<div data-propertyname="submit" data-controltype="Botton" style="display: block;">
+	    		<input type="button" class="btn_green" value="登录">
+	    	</div>
+	    	
+	    </form>
+	    <div class="register_text">还没帐号？</div>
+	    <a  class="btn_green_border">注册</a>
+	</div><!--拉勾UI框架 --><!-- analytics js file -->
+
+
+</body>
+</html>
